@@ -1,0 +1,50 @@
+/* Original guardian-only UI for fixed curated content. */
+(function(){
+  'use strict';
+  const G=ToddlerGuide,stage=document.getElementById('guide-stage'),live=document.getElementById('guide-status');
+  let state=G.initial();
+  function icon(kind){
+    const shapes={palm:'<path d="M35 77 21 53c-3-7 4-11 8-5l7 9V24c0-8 9-8 9 0v21-28c0-8 9-8 9 0v27-24c0-8 9-8 9 0v26-14c0-8 9-8 9 0v28c0 11-7 17-13 22H35Z" fill="#e9b593" stroke="#70463b" stroke-width="3"/>',pattern:'<circle cx="31" cy="34" r="14" fill="#d9937c" stroke="#70463b" stroke-width="3"/><rect x="55" y="20" width="28" height="28" rx="6" fill="#b6cdb1" stroke="#52694f" stroke-width="3"/><circle cx="31" cy="72" r="14" fill="#d9937c" stroke="#70463b" stroke-width="3"/><rect x="55" y="58" width="28" height="28" rx="6" fill="#b6cdb1" stroke="#52694f" stroke-width="3"/>',wave:'<path d="M19 67q13-18 26 0t26 0t16 0M19 48q13-18 26 0t26 0t16 0" fill="none" stroke="#70463b" stroke-width="6" stroke-linecap="round"/><circle cx="77" cy="20" r="9" fill="#dbab5e"/>'};
+    return `<svg viewBox="0 0 100 100" aria-hidden="true">${shapes[kind]||shapes.palm}</svg>`;
+  }
+  function btn(label,action,classes='button',extra=''){return `<button type="button" class="${classes}" data-action="${action}" ${extra}>${label}</button>`;}
+  function render(focusHeading=false,checkIndex=null){
+    const a=G.activity(state);let html='';
+    if(state.phase==='choose'){
+      html='<div class="stage-heading"><p class="eyebrow">PILIH SATU AKTIVITAS</p><h2 id="stage-title" tabindex="-1">Mau mencoba yang mana?</h2><p>Ada tiga pilihan aktivitas. Semuanya cukup dengan tubuh sendiri dan ruang yang diperiksa wali.</p></div><div class="activity-grid">';
+      for(const item of G.ACTIVITIES)html+=`<article class="activity-card">${icon(item.icon)}<p class="eyebrow">${item.tag}</p><h3>${item.name}</h3><p>${item.intro}</p><p class="materials"><strong>Alat & bahan:</strong> ${item.materials}</p>${btn('Lihat persiapan <span class="sr-only">'+item.name+'</span>','select','button',`data-id="${item.id}"`)}</article>`;
+      html+='</div>';
+    }
+    if(state.phase==='prep'){
+      html=`<section class="guide-card prep-card" aria-labelledby="stage-title"><p class="eyebrow">PERSIAPAN WALI · ${a.source}</p><h2 id="stage-title" tabindex="-1">Siapkan dulu, yuk.</h2><h3>${a.name}</h3><p>Periksa bahan dan ruang bermain sebelum mengajak anak. Centang hanya jika wali sendiri sudah memeriksanya. Daftar ini bukan jaminan keselamatan.</p><div class="materials"><strong>Alat & bahan</strong><p>${a.materials}</p></div><div class="safety-checklist" role="group" aria-label="Daftar periksa keselamatan wali">`;
+      G.CHECKLIST.forEach((text,i)=>{const selected=state.checks.includes(i);html+=btn(`<span class="check-symbol" aria-hidden="true">${selected?'✓':'○'}</span><span>${text}</span>`,'check','check-button',`data-index="${i}" aria-pressed="${selected}"`);});
+      const ready=G.CHECKLIST.every((_,i)=>state.checks.includes(i));
+      html+=`</div><p class="guide-small">${ready?'Wali telah menandai semua pemeriksaan. Putuskan sendiri apakah layak dimulai.':'Tandai semua pemeriksaan agar tombol Siap aktif. Jika ragu, berhenti.'}</p><div class="guide-actions">${btn('Siap','ready','button',ready?'':'disabled')}${btn('Pilih aktivitas lain','reset','button secondary')}</div><details class="adaptation"><summary>Adaptasi dari materi terkurasi</summary><p>${a.adaptation}</p><p>${a.source} — Roboclub, Materi Siap Ajar 2–4 Tahun. Adaptasi ini masih memerlukan review keselamatan manusia sebelum penggunaan luas.</p></details></section>`;
+    }
+    if(state.phase==='step'){
+      const cards=G.steps(state),card=cards[state.index];
+      html=`<section class="guide-card step-card" aria-labelledby="stage-title"><p class="eyebrow">${a.name} · ${state.mode==='easier'?'VERSI LEBIH MUDAH':'PANDUAN WALI'}</p><p class="step-caption">Kartu ${state.index+1} dari ${cards.length} · urutan panduan, bukan penilaian anak</p><h2 id="stage-title" tabindex="-1">${card.title}</h2><p class="step-text">${card.text}</p><p class="phone-down"><strong>Baca sebentar, lalu letakkan HP dan bermain bersama.</strong> Wali mendampingi langsung. Berhenti jika anak lelah atau tidak nyaman.</p><div class="guide-actions">${btn(state.index+1<cards.length?'Lanjut ke kartu berikutnya':'Lihat ringkasan','next')}${btn('Coba lebih mudah','easier','button secondary')}${state.index>0?btn('Kartu sebelumnya','previous','quiet-button'):''}</div></section>`;
+    }
+    if(state.phase==='easier'){
+      html=`<section class="guide-card easier-card" aria-labelledby="stage-title"><p class="eyebrow">CABANG TERKURASI · ${a.name}</p><h2 id="stage-title" tabindex="-1">${a.easier.title}</h2><p class="step-text">${a.easier.text}</p><p>Tidak perlu menyelesaikan semua langkah. Kalau anak lelah atau tidak nyaman, gunakan tombol “Anak ingin berhenti”.</p>${btn('Coba langkah ini','try-easier')}</section>`;
+    }
+    if(state.phase==='stopped'){
+      html=`<section class="guide-card stopped-card" aria-labelledby="stage-title"><p class="eyebrow">BERHENTI JUGA PILIHAN</p><h2 id="stage-title" tabindex="-1">Cukup dulu juga boleh.</h2><p class="step-text">Kalau si kecil lelah, tidak nyaman, atau ingin berhenti, akhiri permainan. Dampingi langsung dan beristirahat di tempat yang nyaman. Rapikan ruang bila memungkinkan.</p><p>Tidak ada langkah yang wajib dituntaskan. Panduan ini tidak menilai kemampuan anak.</p><div class="guide-actions">${btn('Lihat ringkasan','summary')}${btn('Kembali ke pilihan aktivitas','reset','button secondary')}</div></section>`;
+    }
+    if(state.phase==='summary'){
+      const result=G.summary(state);
+      html=`<section class="guide-card summary-card" aria-labelledby="stage-title"><p class="eyebrow">RINGKASAN DI LAYAR WALI</p><h2 id="stage-title" tabindex="-1">Panduan yang tadi dibuka.</h2><h3>${result.name}</h3><p>${result.reason==='stopped'?'Wali memilih berhenti.':'Wali sampai pada akhir kartu panduan.'} Tidak ada penilaian kemampuan anak.</p><p>Daftar ini hanya mencatat kartu yang dibuka di layar wali, <strong>bukan bukti aktivitas dilakukan atau selesai oleh anak.</strong></p>`;
+      html+=result.opened.length?'<h3>Kartu panduan yang dibuka</h3><ul class="opened-list">'+result.opened.map(t=>`<li>Dibuka: ${t}</li>`).join('')+'</ul>':'<p>Belum ada kartu langkah yang dibuka.</p>';
+      html+=`<p>${result.usedEasier?'Kartu langkah versi lebih mudah sempat dibuka.':'Tidak ada kartu langkah versi lebih mudah yang dibuka.'} Ringkasan hanya ada selama halaman ini terbuka; muat ulang atau reset menghapusnya.</p><div class="guide-actions">${btn('Pilih aktivitas lain','reset')}<a class="button secondary" href="index.html">Kembali ke beranda</a></div></section>`;
+    }
+    stage.innerHTML=html+`<div class="guide-tools">${btn('Reset panduan','reset','quiet-button')}<span>Reset menghapus pilihan dan kartu yang dibuka dari memori halaman.</span></div>`;
+    stage.dataset.phase=state.phase;
+    const title=stage.querySelector('#stage-title');live.textContent=title?title.textContent:'';
+    if(checkIndex!==null){const b=stage.querySelector(`[data-action="check"][data-index="${checkIndex}"]`);if(b)b.focus();}
+    else if(focusHeading&&title)title.focus();
+  }
+  function send(event){const before=state;state=G.transition(state,event);render(event.type!=='check',event.type==='check'?event.index:null);return before!==state;}
+  stage.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b||b.disabled)return;const type=b.dataset.action;send(type==='select'?{type,id:b.dataset.id}:type==='check'?{type,index:Number(b.dataset.index)}:{type});});
+  document.getElementById('stop-guide').addEventListener('click',()=>send({type:'stop'}));
+  render();
+})();
