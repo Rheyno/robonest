@@ -15,7 +15,12 @@
 .phone-tip p{font-size:.85rem;margin-bottom:8px}
 .phone-tip .quiet-button{min-height:44px}
 /* Phone mode: board first, big tap targets, fixed run bar. */
-body.phone-mode{padding-bottom:96px}
+body.phone-mode{padding-bottom:132px}
+html:has(body.phone-mode){scroll-padding-bottom:132px}
+/* QA: while the intro is open, the run bar is not fixed, so "Susun sendiri dari awal" is never covered. */
+.phone-mode #intro:not([hidden])~.workspace .controls{position:static;box-shadow:none;border-top:0;padding:0;background:none}
+.phone-mode .mission-intro{margin-bottom:18px}
+.phone-mode .program-list>ol:empty:after{content:'Program masih kosong. Tambahkan blok dari palet di atas.'}
 .phone-mode .demo-main{padding-top:18px}
 .phone-mode .demo-main>h1{font-size:1.9rem}
 .phone-mode .mission-intro{flex-direction:column;align-items:stretch;gap:14px;padding:16px}
@@ -44,3 +49,6 @@ body.phone-mode{padding-bottom:96px}
 .phone-mode .keyboard-help{display:none}
 .phone-mode .mission-status{font-size:.9rem}
 @media(prefers-reduced-motion:reduce){.robot-token,.robot-token .eyes{animation:none!important}}
+/* QA: readable grid coordinate labels (was .5rem in styles.css). */
+.grid .coordinate,.grid .finish-label{font-size:.7rem}
+.phone-mode .grid .coordinate{font-size:.7rem;left:3px;top:1px}

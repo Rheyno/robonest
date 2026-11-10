@@ -84,3 +84,11 @@
 .lp-note{font-size:.78rem!important;color:#4d6259;font-style:italic}
 @media(max-width:1100px){.lp-why{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:767px){.lp-why{grid-template-columns:1fr}}
+/* v3.1 Toddler card mascot: waves and hops once (about 2 s), then rests. */
+.lp-level.toddler{position:relative}
+.lp-mascot{position:absolute;right:12px;top:-26px;width:56px;height:56px}
+.lp-mascot .m-hop{transform-box:view-box;transform-origin:32px 60px;animation:lp-m-hop .7s ease-out .3s 2 both}
+.lp-mascot .m-arm{transform-box:view-box;transform-origin:49px 47px;animation:lp-m-wave .45s ease-in-out .4s 4 alternate both}
+@keyframes lp-m-hop{0%,100%{transform:translateY(0)}55%{transform:translateY(-7px)}}
+@keyframes lp-m-wave{from{transform:rotate(0)}to{transform:rotate(-24deg)}}
+@media(prefers-reduced-motion:reduce){.lp-mascot .m-hop,.lp-mascot .m-arm{animation:none!important}}

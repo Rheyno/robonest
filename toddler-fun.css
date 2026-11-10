@@ -1,0 +1,66 @@
+/* RoboNest Toddler v3.1: cute, short animations for the guardian's screen.
+   Every animation runs once and lasts 2.4 s or less, except a subtle blink of the
+   header mascot (outside the main content, once every 8 s). No flashing, no audio,
+   no external assets. Disabled by prefers-reduced-motion and the "Kurangi animasi" toggle. */
+.guide-top{gap:12px}
+.brand-with-mascot{display:inline-flex;align-items:center;gap:8px}
+.mascot{display:block;overflow:visible}
+.top-mascot{width:40px;height:40px;flex:none}
+.top-tools{display:flex;align-items:center;gap:14px}
+.motion-toggle{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 12px;border:2px solid #654a40;border-radius:999px;background:#fffefa;color:#543c35;font:inherit;font-size:.8rem;font-weight:750;cursor:pointer}
+.motion-toggle:hover{background:#fbe7da}
+.motion-toggle:focus-visible{outline:3px solid #543c35;outline-offset:2px}
+.motion-box{width:16px;height:16px;border:2px solid #654a40;border-radius:5px;display:grid;place-items:center;background:#fffefa}
+.motion-toggle[aria-pressed="true"] .motion-box{background:#654a40}
+.motion-toggle[aria-pressed="true"] .motion-box:after{content:'';width:4px;height:8px;border:solid #fffefa;border-width:0 2px 2px 0;transform:translateY(-1px) rotate(45deg)}
+.guide-card{position:relative}
+.card-mascot{position:absolute;right:18px;top:-30px;width:58px;height:58px}
+.card-art{float:right;width:84px;height:84px;margin:0 0 10px 14px}
+.act-art{display:block}
+.summary-card{overflow:hidden}
+.summary-card .card-mascot{top:14px}
+.summary-card .eyebrow{padding-right:70px}
+.guide-top .back-link{white-space:nowrap}
+.summary-card .thanks{font-size:1.15rem;font-weight:750;color:#543c35}
+.celebrate{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.celebrate span{position:absolute;top:-14px;left:calc(6% + var(--i) * 7.6%);opacity:0}
+.c-dot{width:10px;height:10px;border-radius:50%;background:#efb76f}
+.celebrate span:nth-child(4n+2){background:#b6cdb1}.celebrate span:nth-child(4n+3){background:#e9a6a0}
+.c-star{width:16px;height:16px;background:#efb76f;clip-path:polygon(50% 0,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%)}
+@media(max-width:420px){.guide-top .back-link{display:none}}
+@media(max-width:767px){.top-mascot{width:30px;height:30px}.brand-with-mascot{gap:5px}.motion-toggle{font-size:.7rem;padding:4px 9px;gap:6px;white-space:nowrap}.motion-box{width:14px;height:14px}.top-tools{gap:8px}.card-mascot{width:46px;height:46px;top:-24px;right:12px}.card-art{width:64px;height:64px}}
+
+/* Animations: only when motion is allowed. */
+.motion-ok .top-mascot .m-hop{transform-box:view-box;transform-origin:32px 60px;animation:m-hop .7s ease-out 2 both}
+.motion-ok .top-mascot .m-arm{transform-box:view-box;transform-origin:49px 47px;animation:m-wave .5s ease-in-out .2s 4 alternate both}
+.motion-ok .top-mascot.hop .m-hop{animation:m-hop2 .7s ease-out 1 both}
+.motion-ok .top-mascot .m-eyes{transform-box:fill-box;transform-origin:center;animation:m-blink 8s ease-in-out 2.4s infinite}
+.motion-ok .card-mascot .m-hop{transform-box:view-box;transform-origin:32px 60px;animation:m-hop .7s ease-out .15s 1 both}
+.motion-ok .card-mascot .m-arm{transform-box:view-box;transform-origin:49px 47px;animation:m-wave .45s ease-in-out .3s 2 alternate both}
+.motion-ok .card-mascot.cheer .m-hop{animation:m-hop .6s ease-out .1s 3 both}
+.motion-ok .card-mascot.cheer .m-arm{animation:m-wave .4s ease-in-out .1s 4 alternate both}
+.motion-ok .guide-card,.motion-ok .stage-heading,.motion-ok .quick-start-card{animation:card-in .45s cubic-bezier(.2,.9,.3,1.2) both}
+.motion-ok .step-card{animation:card-slide .5s cubic-bezier(.2,.9,.3,1.15) both}
+.motion-ok .activity-card{animation:card-in .5s cubic-bezier(.2,.9,.3,1.2) both}
+.motion-ok .activity-card:nth-child(2){animation-delay:.08s}.motion-ok .activity-card:nth-child(3){animation-delay:.16s}
+.motion-ok .act-art .art-robo{transform-box:fill-box;transform-origin:50% 100%;animation:m-hop .7s ease-out .35s 1 both}
+.motion-ok .act-art .art-move{transform-box:fill-box;transform-origin:center;animation:art-wiggle .9s ease-in-out .5s 1 both}
+.motion-ok .act-art .art-move.alt{animation:art-pop .6s ease-out .9s 1 both}
+.motion-ok .check-button[aria-pressed="true"] .check-symbol{display:inline-block;animation:check-pop .35s ease-out 1 both}
+.motion-ok .celebrate span{animation:confetti 1.9s cubic-bezier(.25,.6,.4,1) calc(var(--i) * .04s) 1 both}
+.motion-ok .celebrate span:nth-child(even){animation-duration:2.1s}
+@keyframes m-hop{0%,100%{transform:translateY(0) scale(1)}30%{transform:translateY(0) scale(1.06,.92)}55%{transform:translateY(-7px) scale(.97,1.04)}80%{transform:translateY(0) scale(1.03,.97)}}
+@keyframes m-hop2{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes m-wave{from{transform:rotate(0)}to{transform:rotate(-24deg)}}
+@keyframes m-blink{0%,96%,100%{transform:scaleY(1)}98%{transform:scaleY(.15)}}
+@keyframes card-in{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes card-slide{from{opacity:0;transform:translateX(28px) rotate(.6deg)}to{opacity:1;transform:none}}
+@keyframes art-wiggle{0%,100%{transform:rotate(0)}30%{transform:rotate(-6deg)}60%{transform:rotate(5deg)}}
+@keyframes art-pop{0%{opacity:0;transform:scale(.4)}70%{opacity:1;transform:scale(1.12)}100%{opacity:1;transform:scale(1)}}
+@keyframes check-pop{0%{transform:scale(.5)}70%{transform:scale(1.25)}100%{transform:scale(1)}}
+@keyframes confetti{0%{opacity:0;transform:translateY(0) rotate(0)}12%{opacity:.95}75%{opacity:.85}100%{opacity:0;transform:translateY(240px) rotate(200deg)}}
+
+/* Calm mode: toggle or system preference. Nothing moves. */
+.calm-motion *,.calm-motion *:before,.calm-motion *:after{animation:none!important;transition:none!important}
+.calm-motion .celebrate{display:none}
+@media(prefers-reduced-motion:reduce){.guide-page *,.guide-page *:before,.guide-page *:after{animation:none!important;transition:none!important}.celebrate{display:none}}

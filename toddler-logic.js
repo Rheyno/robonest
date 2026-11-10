@@ -13,13 +13,13 @@
     {id:'pesan',name:'Aku robot, kamu pemberi pesan',source:'Sesi 01',icon:'palm',tag:'Pesan & pilihan',
      intro:'Wali menjadi robot yang mengikuti pesan berhenti. Anak boleh memberi gestur atau hanya mengamati.',
      materials:'Tubuh sendiri dan ruang duduk datar yang tidak licin. Tidak perlu kartu, mainan, atau alat.',
-     adaptation:'Kartu A4 diganti gestur telapak tangan. Gerak maju dan tukar peran berjalan dihilangkan; gunakan versi duduk dan pesan stop dari remedial sumber.',
+     adaptation:'Kartu A4 diganti gestur telapak tangan. Gerak maju dan tukar peran berjalan dihilangkan; gunakan versi duduk dan pesan berhenti dari remedial sumber.',
      regular:[
-       {id:'pesan-contoh',title:'Wali contohkan pesan berhenti',text:'Tetap duduk dengan nyaman. Wali tunjukkan telapak tangan terbuka sambil berkata pelan “stop”, lalu diam. Tidak perlu berpindah tempat.'},
-       {id:'pesan-pilih',title:'Ikuti pilihan si kecil',text:'Tawarkan anak memilih gestur stop atau mengamati. Bila anak ingin memberi pesan, wali mengikuti dengan diam. Tidak perlu meminta anak bergerak atau menggerakkan tangannya.'},
+       {id:'pesan-contoh',title:'Wali contohkan pesan berhenti',text:'Tetap duduk dengan nyaman. Wali tunjukkan telapak tangan terbuka sambil berkata pelan “berhenti”, lalu diam. Tidak perlu berpindah tempat.'},
+       {id:'pesan-pilih',title:'Ikuti pilihan si kecil',text:'Tawarkan anak memilih gestur berhenti atau mengamati. Bila anak ingin memberi pesan, wali mengikuti dengan diam. Tidak perlu meminta anak bergerak atau menggerakkan tangannya.'},
        {id:'pesan-tutup',title:'Cukup atau ingin mencoba lagi?',text:'Terima pilihan berhenti. Bila anak sendiri ingin mengulang dan tetap nyaman, wali boleh mencontoh pesan yang sama. Tidak perlu menambah gerakan.'}
      ],
-     easier:{title:'Kita sederhanakan, yuk.',text:'Cukup wali menunjukkan satu telapak tangan untuk stop sambil duduk. Anak boleh diam mengamati; tidak perlu memilih atau meniru.',steps:[{id:'pesan-amati',title:'Satu pesan, boleh mengamati saja',text:'Wali duduk dan menunjukkan telapak tangan stop dengan lembut. Anak boleh mengamati tanpa memberi respons. Lalu akhiri bila cukup.'}]}},
+     easier:{title:'Kita sederhanakan, yuk.',text:'Cukup wali menunjukkan satu telapak tangan untuk berhenti sambil duduk. Anak boleh diam mengamati; tidak perlu memilih atau meniru.',steps:[{id:'pesan-amati',title:'Satu pesan, boleh mengamati saja',text:'Wali duduk dan menunjukkan telapak tangan berhenti dengan lembut. Anak boleh mengamati tanpa memberi respons. Lalu akhiri bila cukup.'}]}},
     {id:'pola',name:'Temukan pola robot',source:'Sesi 04',icon:'pattern',tag:'Pola gerak lembut',
      intro:'Gunakan pilihan pola gerak dari materi: tepuk lembut lalu lambaikan. Tanpa balok atau kartu.',
      materials:'Tubuh sendiri dan ruang duduk datar yang tidak licin. Tidak ada benda yang perlu diambil.',
