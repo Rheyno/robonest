@@ -92,3 +92,10 @@
 @keyframes lp-m-hop{0%,100%{transform:translateY(0)}55%{transform:translateY(-7px)}}
 @keyframes lp-m-wave{from{transform:rotate(0)}to{transform:rotate(-24deg)}}
 @media(prefers-reduced-motion:reduce){.lp-mascot .m-hop,.lp-mascot .m-arm{animation:none!important}}
+/* v3.2 cheerful Toddler card (only this card). Dark ink on light colours. */
+.lp-level.toddler.is-open{background:linear-gradient(160deg,#fff4c2 0,#ffe0ee 55%,#ece2ff 100%);border:3px solid #a685e2;border-radius:26px;box-shadow:0 8px 0 -2px #ff9ec4}
+.lp-level.toddler h3,.lp-level.toddler p{color:#2b2350}
+.lp-level.toddler h3 span,.lp-level.toddler .lp-device,.lp-level.toddler .lp-note{color:#463d6e}
+.lp-level.toddler .lp-status.open{background:#dcf5dc;border-color:#2e9e48;color:#1d4a24!important}
+.lp-level.toddler .button{background:#ffd84d;border:3px solid #2b2350;color:#2b2350;border-radius:999px;font-weight:800;box-shadow:0 5px 0 #ff9f43}
+.lp-level.toddler .button:hover{background:#ffe680}

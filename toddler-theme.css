@@ -1,0 +1,72 @@
+/* RoboNest Toddler v3.2 cheerful theme (guardian's screen; the child stays screen-free).
+   Dark ink on light colours only; every text pair is ≥4.5:1 (checked in tests).
+   No image files or external assets. Loaded after v2.css and toddler-fun.css. */
+.guide-page{
+  --ink:#2b2350;--ink-soft:#463d6e;
+  --sun:#ffd84d;--sun-tint:#fff4c2;--orange:#ff9f43;--orange-tint:#ffe3c7;
+  --green:#8fd694;--green-tint:#dcf5dc;--sky:#6ec6ff;--sky-tint:#d9f0ff;
+  --pink:#ff9ec4;--pink-tint:#ffe0ee;--purple:#a685e2;--purple-tint:#ece2ff;
+  --warm-ink:#2b2350;--warm-muted:#463d6e;
+  color:#2b2350;
+  background:
+    radial-gradient(circle at 8% 14%,#ffffffcc 0 46px,transparent 47px),
+    radial-gradient(circle at 12% 12%,#ffffffcc 0 34px,transparent 35px),
+    radial-gradient(circle at 88% 30%,#ffffffb3 0 52px,transparent 53px),
+    radial-gradient(circle at 93% 28%,#ffffffb3 0 36px,transparent 37px),
+    radial-gradient(#a685e233 2.5px,transparent 3px) 0 0/34px 34px,
+    linear-gradient(180deg,#e6f6ff 0,#fff0f6 45%,#fff8d6 100%) fixed;
+}
+.guide-page p{color:#463d6e}
+.guide-page a{color:#2b2350}
+.guide-page h1,.guide-page h2,.guide-page h3{color:#2b2350}
+.guide-page .eyebrow{color:#5b2fa8}
+.guide-hero em{color:#5b2fa8}
+.guide-top .brand{color:#2b2350}
+.guardian-art>path:first-of-type{fill:#ece2ff}
+/* Guardian bar stays sticky and calm-bright; stop button is the most recognisable control. */
+.guardian-bar{background:#fff4c2;border-block:2px solid #ffb703;box-shadow:0 4px 12px #2b235018}
+.guardian-labels p{color:#2b2350}
+.guardian-labels .curated-label{display:inline-block;margin-top:4px;padding:3px 10px;background:#ffffff;border:2px solid #a685e2;border-radius:999px;color:#2b2350}
+.stop-button{background:#ffe5e5;border:3px solid #c62828;color:#8a1414;border-radius:999px;font-weight:800;box-shadow:0 4px 0 #c62828}
+.stop-button:before{content:'✋';margin-right:8px}
+.stop-button:hover{background:#ffd2d2}
+.stop-button:focus-visible{outline:3px solid #2b2350;outline-offset:3px}
+/* Safety banner: green, thick edge, clearly separate from playful cards. */
+.safety-banner{background:#dcf5dc;border:2px solid #2e9e48;border-left:10px solid #2e9e48;color:#1d4a24!important;border-radius:18px;font-size:.95rem}
+.safety-banner strong{color:#1d4a24}
+/* Colourful rounded buttons with dark text. */
+.guide-page .button{background:#ffd84d;color:#2b2350;border:3px solid #2b2350;border-radius:999px;font-weight:800;box-shadow:0 5px 0 #ff9f43}
+.guide-page .button:hover{background:#ffe680}
+.guide-page .button.secondary{background:#d9f0ff;color:#2b2350;border-color:#2b2350;box-shadow:0 5px 0 #6ec6ff}
+.guide-page .button.secondary:hover{background:#c4e7ff}
+.guide-page .quiet-button{background:#ffffff;color:#2b2350;border:2px solid #a685e2;border-radius:999px}
+.guide-page .button:disabled{background:#e8e4f0;border-color:#8a84a3;color:#4a4466;box-shadow:none}
+.motion-toggle{border-color:#a685e2;color:#2b2350;background:#ffffff}
+.motion-toggle:hover{background:#ece2ff}
+.motion-box{border-color:#5b2fa8}
+.motion-toggle[aria-pressed="true"] .motion-box{background:#5b2fa8}
+/* Cards: a different colour per activity. */
+.quick-start-card{background:#fff4c2;border:3px solid #ff9f43;border-radius:26px}
+.quick-start-card h2,.quick-start-card p{color:#2b2350}
+.activity-card{border-width:3px;border-radius:28px;box-shadow:0 8px 0 -2px #2b235014}
+.activity-card:nth-child(1){background:#ffe0ee;border-color:#ff9ec4}
+.activity-card:nth-child(2){background:#dcf5dc;border-color:#8fd694}
+.activity-card:nth-child(3){background:#d9f0ff;border-color:#6ec6ff}
+.activity-card .eyebrow{display:inline-block;padding:3px 10px;border-radius:999px;background:#ffffff;color:#5b2fa8}
+.guide-page .materials{background:#ffffff;border:2px dashed #a685e2;color:#2b2350;border-radius:16px}
+.guide-card{background:#ffffff;border:3px solid #a685e2;border-radius:28px;box-shadow:0 10px 0 -2px #ece2ff}
+.step-card{border-color:#6ec6ff;box-shadow:0 10px 0 -2px #d9f0ff}
+.easier-card{background:#dcf5dc;border-color:#8fd694}
+.stopped-card{background:#fff4c2;border-color:#ffb703}
+.summary-card{background:#fff0f6;border-color:#ff9ec4;box-shadow:0 10px 0 -2px #ffe0ee}
+.step-caption{color:#463d6e!important}
+.phone-down{background:#fff4c2;border:2px solid #ffb703;border-radius:16px}
+.check-button{background:#ffffff;color:#2b2350;border:2px solid #a685e2;border-radius:16px}
+.check-button[aria-pressed=true]{background:#dcf5dc;border-color:#2e9e48;color:#1d4a24}
+.guide-tools{color:#463d6e}
+.guide-source{border-top:2px dashed #a685e2}
+.guide-page .site-footer,.guide-page .site-footer span{color:#463d6e}
+.c-dot{background:#ffd84d}
+.celebrate span:nth-child(4n+2){background:#8fd694}.celebrate span:nth-child(4n+3){background:#ff9ec4}.celebrate span:nth-child(4n){background:#6ec6ff}
+.c-star{background:#a685e2}
+.guide-page #stage-title:focus,.guide-page #stage-title:focus-visible{outline:3px solid #a685e2;outline-offset:4px;border-radius:12px}
