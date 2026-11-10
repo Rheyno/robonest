@@ -4,11 +4,10 @@
   else root.ToddlerGuide=factory();
 })(typeof globalThis!=='undefined'?globalThis:this,function(){
   'use strict';
+  /* v3: two combined guardian checks (was four); every safety point is kept. */
   const CHECKLIST=[
-    'Saya wali dewasa yang hadir langsung. HP hanya saya gunakan; anak tidak perlu melihat layar.',
-    'Ruang datar, tidak licin, bebas halangan dan jauh dari tangga, air, panas, serta benda berbahaya.',
-    'Tidak ada mainan kecil, magnet lepas, baterai, kabel atau elektronik. Aktivitas ini cukup dengan tubuh sendiri.',
-    'Anak boleh mengamati atau menolak. Saya berhenti jika anak lelah, tidak nyaman, atau ingin berhenti.'
+    'Saya wali dewasa yang hadir langsung dan memegang HP; anak tidak perlu melihat layar. Anak boleh mengamati atau menolak, dan saya berhenti jika anak lelah, tidak nyaman, atau ingin berhenti.',
+    'Ruang duduk datar, tidak licin, bebas halangan, jauh dari tangga, air, panas, dan benda berbahaya. Tidak ada mainan kecil, magnet lepas, baterai, kabel, atau elektronik; cukup tubuh sendiri.'
   ];
   const ACTIVITIES=[
     {id:'pesan',name:'Aku robot, kamu pemberi pesan',source:'Sesi 01',icon:'palm',tag:'Pesan & pilihan',
@@ -68,5 +67,6 @@
     return s;
   }
   function summary(s){const a=activity(s);const cards=a?[...a.regular,...a.easier.steps]:[];return {name:a?a.name:'Belum ada aktivitas dipilih',opened:s.opened.map(id=>cards.find(c=>c.id===id)).filter(Boolean).map(c=>c.title),usedEasier:s.usedEasier,reason:s.reason};}
-  return {ACTIVITIES,CHECKLIST,HAND_REMINDER,initial,activity,steps,transition,summary};
+  const QUICK_START_ID='ulang';
+  return {ACTIVITIES,CHECKLIST,HAND_REMINDER,QUICK_START_ID,initial,activity,steps,transition,summary};
 });

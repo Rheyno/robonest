@@ -11,15 +11,17 @@
   function render(focusHeading=false,checkIndex=null){
     const a=G.activity(state);let html='';
     if(state.phase==='choose'){
-      html='<div class="stage-heading"><p class="eyebrow">PILIH SATU AKTIVITAS</p><h2 id="stage-title" tabindex="-1">Mau mencoba yang mana?</h2><p>Ada tiga pilihan aktivitas. Semuanya cukup dengan tubuh sendiri dan ruang yang diperiksa wali.</p></div><div class="activity-grid">';
+      const quick=G.ACTIVITIES.find(x=>x.id===G.QUICK_START_ID);
+      html=`<section class="quick-start-card" aria-labelledby="quick-title"><div><p class="eyebrow">JALUR CEPAT</p><h2 id="quick-title">Mau langsung main?</h2><p>Mulai dengan <strong>${quick.name}</strong>: wali melambaikan tangan lalu diam, sambil duduk. Cukup 2 pemeriksaan singkat, lalu letakkan HP.</p></div>${btn('Mulai cepat <span aria-hidden="true">→</span>','quick','button')}</section>`;
+      html+='<div class="stage-heading"><p class="eyebrow">ATAU PILIH SATU AKTIVITAS</p><h2 id="stage-title" tabindex="-1">Mau mencoba yang mana?</h2><p>Ada tiga pilihan aktivitas. Semuanya cukup dengan tubuh sendiri dan ruang yang diperiksa wali.</p></div><div class="activity-grid">';
       for(const item of G.ACTIVITIES)html+=`<article class="activity-card">${icon(item.icon)}<p class="eyebrow">${item.tag}</p><h3>${item.name}</h3><p>${item.intro}</p><p class="materials"><strong>Alat & bahan:</strong> ${item.materials}</p>${btn('Lihat persiapan <span class="sr-only">'+item.name+'</span>','select','button',`data-id="${item.id}"`)}</article>`;
       html+='</div>';
     }
     if(state.phase==='prep'){
-      html=`<section class="guide-card prep-card" aria-labelledby="stage-title"><p class="eyebrow">PERSIAPAN WALI · ${a.source}</p><h2 id="stage-title" tabindex="-1">Siapkan dulu, yuk.</h2><h3>${a.name}</h3><p>Periksa bahan dan ruang bermain sebelum mengajak anak. Centang hanya jika wali sendiri sudah memeriksanya. Daftar ini bukan jaminan keselamatan.</p><div class="materials"><strong>Alat & bahan</strong><p>${a.materials}</p></div><div class="safety-checklist" role="group" aria-label="Daftar periksa keselamatan wali">`;
+      html=`<section class="guide-card prep-card" aria-labelledby="stage-title"><p class="eyebrow">PERSIAPAN WALI · ${a.source}</p><h2 id="stage-title" tabindex="-1">Siapkan dulu, yuk.</h2><h3>${a.name}</h3><p>Dua pemeriksaan singkat sebelum mengajak anak. Ketuk hanya jika wali sendiri sudah memeriksanya. Daftar ini bukan jaminan keselamatan.</p><p class="materials"><strong>Alat & bahan:</strong> ${a.materials}</p><div class="safety-checklist" role="group" aria-label="Daftar periksa keselamatan wali">`;
       G.CHECKLIST.forEach((text,i)=>{const selected=state.checks.includes(i);html+=btn(`<span class="check-symbol" aria-hidden="true">${selected?'✓':'○'}</span><span>${text}</span>`,'check','check-button',`data-index="${i}" aria-pressed="${selected}"`);});
       const ready=G.CHECKLIST.every((_,i)=>state.checks.includes(i));
-      html+=`</div><p class="guide-small">${ready?'Wali telah menandai semua pemeriksaan. Putuskan sendiri apakah layak dimulai.':'Tandai semua pemeriksaan agar tombol Siap aktif. Jika ragu, berhenti.'}</p><div class="guide-actions">${btn('Siap','ready','button',ready?'':'disabled')}${btn('Pilih aktivitas lain','reset','button secondary')}</div><details class="adaptation"><summary>Adaptasi dari materi terkurasi</summary><p>${a.adaptation}</p><p>${a.source} — Roboclub, Materi Siap Ajar 2–4 Tahun. Adaptasi ini masih memerlukan review keselamatan manusia sebelum penggunaan luas.</p></details></section>`;
+      html+=`</div><p class="guide-small">${ready?'Wali telah menandai semua pemeriksaan. Putuskan sendiri apakah layak dimulai.':'Tandai kedua pemeriksaan agar tombol Siap aktif. Jika ragu, berhenti.'}</p><div class="guide-actions">${btn('Siap, mulai bermain','ready','button',ready?'':'disabled')}${btn('Pilih aktivitas lain','reset','button secondary')}</div><details class="adaptation"><summary>Adaptasi dari materi terkurasi</summary><p>${a.adaptation}</p><p>${a.source} — Roboclub, Materi Siap Ajar 2–4 Tahun. Adaptasi ini masih memerlukan review keselamatan manusia sebelum penggunaan luas.</p></details></section>`;
     }
     if(state.phase==='step'){
       const cards=G.steps(state),card=cards[state.index];
@@ -44,7 +46,7 @@
     else if(focusHeading&&title)title.focus();
   }
   function send(event){const before=state;state=G.transition(state,event);render(event.type!=='check',event.type==='check'?event.index:null);return before!==state;}
-  stage.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b||b.disabled)return;const type=b.dataset.action;send(type==='select'?{type,id:b.dataset.id}:type==='check'?{type,index:Number(b.dataset.index)}:{type});});
+  stage.addEventListener('click',e=>{const b=e.target.closest('[data-action]');if(!b||b.disabled)return;const type=b.dataset.action;send(type==='quick'?{type:'select',id:G.QUICK_START_ID}:type==='select'?{type,id:b.dataset.id}:type==='check'?{type,index:Number(b.dataset.index)}:{type});});
   document.getElementById('stop-guide').addEventListener('click',()=>send({type:'stop'}));
   render();
 })();

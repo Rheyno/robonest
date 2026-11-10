@@ -1,0 +1,46 @@
+/* RoboNest Kids v3: quick start, ready-made loop, phone mode. No external assets. */
+.intro-actions{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0}
+.mission-intro #quick-start{font-size:.95rem;min-height:52px;padding:12px 22px;background:#28614c;border-color:#28614c}
+.mission-intro #quick-start:hover{background:#193f35}
+.palette-body>button.preset{background:#f4e6c7;border-color:#8a703e;border-style:dashed}
+.palette-body>button.preset small{display:block;font-size:.66rem;font-weight:600;color:#5b4a22;margin-top:2px}
+.block-row .into.filling{background:#f9e1b6;border-color:#8a703e;font-weight:750}
+.robot-token{animation:robo-pop .35s ease-out}
+.robot-token .eyes{animation:robo-blink 4s infinite}
+@keyframes robo-pop{0%{transform:scale(.7)}70%{transform:scale(1.08)}100%{transform:scale(1)}}
+@keyframes robo-blink{0%,92%,100%{opacity:1}95%{opacity:.2}}
+.phone-tip{display:flex;gap:14px;align-items:flex-start;margin:18px 0;padding:16px 18px;max-width:none;border-radius:14px}
+.phone-tip .device-icon{font-size:1.8rem;line-height:1}
+.phone-tip h2{font-size:1.05rem;margin-bottom:4px;letter-spacing:-.01em}
+.phone-tip p{font-size:.85rem;margin-bottom:8px}
+.phone-tip .quiet-button{min-height:44px}
+/* Phone mode: board first, big tap targets, fixed run bar. */
+body.phone-mode{padding-bottom:96px}
+.phone-mode .demo-main{padding-top:18px}
+.phone-mode .demo-main>h1{font-size:1.9rem}
+.phone-mode .mission-intro{flex-direction:column;align-items:stretch;gap:14px;padding:16px}
+.phone-mode .intro-actions{flex-direction:column}
+.phone-mode .intro-actions .button,.phone-mode .intro-actions .quiet-button{width:100%;min-height:54px;font-size:1rem}
+.phone-mode .workspace{display:flex;flex-direction:column;gap:12px}
+.phone-mode .board-panel{order:1}
+.phone-mode .palette-panel{order:2}
+.phone-mode .program-panel{order:3}
+.phone-mode .board-body{padding:10px}
+.phone-mode .grid{max-width:320px;margin-inline:auto}
+.phone-mode .board-legend,.phone-mode .board-key{font-size:.75rem}
+.phone-mode .palette-body{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}
+.phone-mode .palette-body>button{margin:0;min-height:64px;font-size:1rem;text-align:center;padding:8px}
+.phone-mode .palette-body>button.preset{grid-column:1 / -1}
+.phone-mode .palette-help{font-size:.78rem;padding:0 12px 12px}
+.phone-mode .program-list{min-height:120px}
+.phone-mode .program-toolbar .quiet-button{min-height:48px;font-size:.85rem}
+.phone-mode .block-row button[data-action=up],.phone-mode .block-row button[data-action=down]{display:none}
+.phone-mode .block-row button{min-width:48px;min-height:48px;font-size:.9rem}
+.phone-mode .block-name{font-size:.95rem}
+.phone-mode .repeat-settings input{width:52px}
+.phone-mode .controls{position:fixed;left:0;right:0;bottom:0;z-index:20;margin:0;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:6px;padding:10px 10px calc(10px + env(safe-area-inset-bottom));background:#fffefa;border-top:1px solid #b7c2b3;box-shadow:0 -6px 18px #193f351f}
+.phone-mode .controls .button{font-size:1rem;min-height:56px;padding:6px}
+.phone-mode .controls .quiet-button{font-size:.74rem;min-height:56px;padding:4px;white-space:normal;line-height:1.2}
+.phone-mode .keyboard-help{display:none}
+.phone-mode .mission-status{font-size:.9rem}
+@media(prefers-reduced-motion:reduce){.robot-token,.robot-token .eyes{animation:none!important}}
