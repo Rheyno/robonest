@@ -70,3 +70,12 @@
 .celebrate span:nth-child(4n+2){background:#8fd694}.celebrate span:nth-child(4n+3){background:#ff9ec4}.celebrate span:nth-child(4n){background:#6ec6ff}
 .c-star{background:#a685e2}
 .guide-page #stage-title:focus,.guide-page #stage-title:focus-visible{outline:3px solid #a685e2;outline-offset:4px;border-radius:12px}
+/* v3.3 leftovers: summary thank-you line and desktop hero hand + flower in the cheerful palette. */
+.summary-card .thanks{color:#5b2fa8}
+.guardian-art>circle:first-of-type{fill:#ffd84d}
+.guardian-art>path:nth-of-type(2){stroke:#ff9f43}
+.guardian-art>path:nth-of-type(3){fill:#ffd0a6;stroke:#2b2350}
+.guardian-art>path:nth-of-type(4){fill:#6ec6ff}
+.guardian-art>path:nth-of-type(5){fill:#8fd694;stroke:#2f7a3a}
+.guardian-art>g ellipse{fill:#ff9ec4;stroke:#a685e2}
+.guardian-art>circle:last-of-type{fill:#ffd84d;stroke:#ff9f43}
